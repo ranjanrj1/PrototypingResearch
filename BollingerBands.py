@@ -19,15 +19,6 @@ df['Daily Return'] = df['Close'].pct_change()
 df['HitUpper'] = df['High'] > df['Upper'].shift(1)
 df['HitLower'] = df['Low'] < df['Lower'].shift(1)
 
-df['MaxUpper'] = 100*(df['High'] - df['Upper'].shift(1))/df['Upper'].shift(1)
-df.MaxUpper[df['MaxUpper']< 0]=np.NaN
-print(df['MaxUpper'].mean())
-print(df['MaxUpper'].max())
-
-df['MaxLower'] = 100*(df['Low'] - df['Lower'].shift(1))/df['Lower'].shift(1)
-df.MaxLower[df['MaxLower']> 0]=np.NaN
-print(df['MaxLower'].mean())
-print(df['MaxLower'].min())
 
 plt.figure(figsize = (12,6))
 plt.plot(df['Close'], label="Price")
@@ -38,3 +29,14 @@ plt.xlabel("Date")
 plt.ylabel("Price")
 plt.legend()
 plt.show()
+
+#added code to analyze average and min/max movements above/below bands
+df['MaxUpper'] = 100*(df['High'] - df['Upper'].shift(1))/df['Upper'].shift(1)
+df.MaxUpper[df['MaxUpper']< 0]=np.NaN
+print(df['MaxUpper'].mean())
+print(df['MaxUpper'].max())
+
+df['MaxLower'] = 100*(df['Low'] - df['Lower'].shift(1))/df['Lower'].shift(1)
+df.MaxLower[df['MaxLower']> 0]=np.NaN
+print(df['MaxLower'].mean())
+print(df['MaxLower'].min())
