@@ -71,6 +71,11 @@ Bought=df[df['Buy/Sell']==1]['Close'].sum()*Psize
 Sold=df[df['Buy/Sell']==-1]['Close'].sum()*Psize
 print('Initial Portfolio Value: ', Initialport,'\nFinal Portfolio Value: ',   Initialport-Bought+Sold, '\nReturns: ', Sold-Bought)
 #Nilay - Combine with Bollinger Band
+df['Close: 30 Day Mean'] = df['Close'].rollling(window=20).mean()
+df['Upper'] = df['Close: 30 Day Mean'] + 2*df['Close'].rolling(window=20).std()
+df['Lower'] = df['Close: 30 Day Mean'] - 2*df['Close'].rolling(window=20).std()
+df[['Close', 'Close: 30 Day Mean','Upper','Lower']].plot()
+
 
 #Leoni - Potential strategies with probability
 
